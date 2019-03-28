@@ -9,6 +9,7 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnit
 
 class DashboardPresenterUTest {
@@ -57,7 +58,7 @@ class DashboardPresenterUTest {
         mPresenter.getInfo()
 
         // Verify
-        Mockito.verify(mView).displayInformation(mCategoryBean)
+        verify(mView).displayInformation(mCategoryBean)
     }
 
     @Test
@@ -72,7 +73,24 @@ class DashboardPresenterUTest {
         mPresenter.getInfo()
 
         // Verify
-        Mockito.verify(mView).displayError()
+        verify(mView).displayError()
+    }
+
+    @Test
+    fun goToSubCategory() {
+        // Given
+        Mockito.doAnswer { invocation ->
+            val subscriber = invocation.arguments[0] as DashboardPresenter.GetInfoSubscriber
+            subscriber.onNext(mResourceBean)
+            null
+        }.`when`(mDashboardUseCase).execute(ArgumentMatchers.any(DashboardPresenter.GetInfoSubscriber::class.java))
+        mPresenter.getInfo()
+
+        // When
+        mPresenter.goToSubCategory(1, "someName")
+
+        // Verify
+        verify(mRouter).goToSubCategory(1, "someName", mCategoryBean, mView)
     }
 
 }

@@ -1,12 +1,9 @@
 package com.tai.androidtai.modules.dashboard
 
-import android.util.Log
-
-import com.tai.androidtai.domain.bean.ResourceBean
 import com.tai.androidtai.domain.bean.CategoryBean
+import com.tai.androidtai.domain.bean.ResourceBean
 import com.tai.androidtai.domain.usecase.DashboardUseCase
 import com.tai.androidtai.modules.core.BaseContract
-
 import io.reactivex.annotations.NonNull
 import io.reactivex.observers.ResourceObserver
 
