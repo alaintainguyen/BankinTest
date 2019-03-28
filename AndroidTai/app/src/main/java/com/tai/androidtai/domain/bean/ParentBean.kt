@@ -4,13 +4,17 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
-class ParentBean(parcel: Parcel) : Parcelable {
+class ParentBean : Parcelable {
 
     @SerializedName("id")
     private var mId: Int = 0
 
-    init {
+    private constructor(parcel: Parcel) {
         mId = parcel.readInt()
+    }
+
+    constructor(id: Int) {
+        mId = id
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {

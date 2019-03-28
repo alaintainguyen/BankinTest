@@ -47,6 +47,10 @@ class CategoryBean : Parcelable {
         return mParent
     }
 
+    fun setParent(parent: ParentBean) {
+        mParent = parent
+    }
+
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<CategoryBean> = object : Parcelable.Creator<CategoryBean> {
