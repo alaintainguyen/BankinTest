@@ -60,6 +60,7 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
 
         override fun onError(@NonNull e: Throwable) {
             Log.e(TAG, e.message)
+            mView?.displayError(e.message)
         }
 
         override fun onComplete() {

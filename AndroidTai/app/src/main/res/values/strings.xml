@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">EcoMoney App</string>
-    <string name="user_principal_information">Information principale</string>
+    <string name="generic_error">Un problème est survenu. Veuillez recommencer ultérieurement.</string>
 </resources>

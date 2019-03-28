@@ -1,7 +1,9 @@
 package com.tai.androidtai.modules.dashboard
 
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.tai.androidtai.R
 import com.tai.androidtai.domain.bean.CategoryBean
 import com.tai.androidtai.modules.core.BaseActivity
@@ -30,6 +32,13 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
         dashboard_rv.layoutManager = GridLayoutManager(this, NUMBER_OF_COLUMN)
         dashboard_rv.adapter = mDashboardListAdapter
         mPresenter.getInfo()
+
+        dashboard_refresh.setColorSchemeColors(ContextCompat.getColor(this, R.color.colorPrimary))
+
+        dashboard_refresh.setOnRefreshListener {
+            mDashboardListAdapter.clear()
+            mPresenter.getInfo()
+        }
     }
 
     override fun onDestroy() {
@@ -37,7 +46,14 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
         mPresenter.unsubscribe(this)
     }
 
+    override fun displayError(message: String?) {
+        dashboard_refresh.isRefreshing = false
+        Snackbar.make(dashboard_refresh, R.string.generic_error, Snackbar.LENGTH_LONG).show()
+
+    }
+
     override fun displayInformation(allCategories: ArrayList<CategoryBean>) {
+        dashboard_refresh.isRefreshing = false
         mDashboardListAdapter.addInformation(allCategories)
         mDashboardListAdapter.notifyDataSetChanged()
     }

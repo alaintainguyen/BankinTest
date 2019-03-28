@@ -34,6 +34,10 @@ class DashboardListAdapter internal constructor(private val mPresenter: Dashboar
         mItems.addAll(categories)
     }
 
+    fun clear() {
+        mItems.clear()
+    }
+
     inner class DashboardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         init {
