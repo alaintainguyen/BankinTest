@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
-class CategoryBean private constructor(parcel: Parcel) : Parcelable {
+class CategoryBean : Parcelable {
 
     @SerializedName("id")
     private var mId: Int = 0
@@ -15,10 +15,14 @@ class CategoryBean private constructor(parcel: Parcel) : Parcelable {
     @SerializedName("parent")
     private var mParent: ParentBean? = null
 
-    init {
+    private constructor(parcel: Parcel) {
         mId = parcel.readInt()
         mName = parcel.readString()
         mParent = parcel.readParcelable(ParentBean::class.java.classLoader)
+    }
+
+    constructor(id: Int) {
+        mId = id
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {

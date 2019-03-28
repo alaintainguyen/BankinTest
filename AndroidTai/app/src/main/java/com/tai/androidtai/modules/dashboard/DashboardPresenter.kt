@@ -19,10 +19,6 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
         private val TAG = DashboardPresenter::class.java.simpleName
     }
 
-    override fun getInfo() {
-        mDashboardUseCase.execute(GetInfoSubscriber())
-    }
-
     override fun subscribe(view: BaseContract.View) {
         mView = view as DashboardContract.View
     }
@@ -31,6 +27,10 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
         if (mView == view) {
             mView = null
         }
+    }
+
+    override fun getInfo() {
+        mDashboardUseCase.execute(GetInfoSubscriber())
     }
 
     override fun goToSubCategory(categoryId: Int, name: String?) {
@@ -50,7 +50,7 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
         return categoryList
     }
 
-    private inner class GetInfoSubscriber : ResourceObserver<ResourceBean>() {
+    inner class GetInfoSubscriber : ResourceObserver<ResourceBean>() {
 
         override fun onNext(@NonNull resources: ResourceBean) {
             mResources = resources.getResultList()
@@ -59,8 +59,7 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
         }
 
         override fun onError(@NonNull e: Throwable) {
-            Log.e(TAG, e.message)
-            mView?.displayError(e.message)
+            mView?.displayError()
         }
 
         override fun onComplete() {

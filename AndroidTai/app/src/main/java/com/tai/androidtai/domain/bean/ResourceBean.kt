@@ -4,10 +4,18 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
-class ResourceBean private constructor(parcel: Parcel) : Parcelable {
+class ResourceBean : Parcelable {
 
     @SerializedName("resources")
-    var mCategoryBean: ArrayList<CategoryBean> = parcel.createTypedArrayList(CategoryBean.CREATOR) as ArrayList<CategoryBean>
+    var mCategoryBean: ArrayList<CategoryBean> = arrayListOf()
+
+    private constructor(parcel: Parcel) {
+        mCategoryBean = parcel.createTypedArrayList(CategoryBean.CREATOR) as ArrayList<CategoryBean>
+    }
+
+    constructor(resource: ArrayList<CategoryBean>) {
+        mCategoryBean = resource
+    }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeTypedList<CategoryBean>(mCategoryBean)

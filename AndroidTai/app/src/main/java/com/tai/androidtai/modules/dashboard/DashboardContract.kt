@@ -7,7 +7,7 @@ interface DashboardContract {
 
     interface View : BaseContract.View {
         fun displayInformation(allCategories: ArrayList<CategoryBean>)
-        fun displayError(message: String?)
+        fun displayError()
     }
 
     interface Presenter : BaseContract.Presenter {

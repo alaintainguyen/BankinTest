@@ -46,7 +46,7 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
         mPresenter.unsubscribe(this)
     }
 
-    override fun displayError(message: String?) {
+    override fun displayError() {
         dashboard_refresh.isRefreshing = false
         Snackbar.make(dashboard_refresh, R.string.generic_error, Snackbar.LENGTH_LONG).show()
 
