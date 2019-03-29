@@ -12,10 +12,6 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
     private var mView: DashboardContract.View? = null
     private var mResources: ArrayList<CategoryBean> = arrayListOf()
 
-    companion object {
-        private val TAG = DashboardPresenter::class.java.simpleName
-    }
-
     override fun subscribe(view: BaseContract.View) {
         mView = view as DashboardContract.View
     }
