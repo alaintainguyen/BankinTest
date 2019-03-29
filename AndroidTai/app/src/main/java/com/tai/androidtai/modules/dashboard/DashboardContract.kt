@@ -12,11 +12,11 @@ interface DashboardContract {
 
     interface Presenter : BaseContract.Presenter {
         fun getInfo()
-        fun goToSubCategory(categoryId: Int, name: String?)
+//        fun goToSubCategory(categoryId: Int, name: String?)
     }
 
     interface Router : BaseContract.Router {
-        fun goToSubCategory(categoryId: Int, name: String?, resources: ArrayList<CategoryBean>, view: View?)
+//        fun goToSubCategory(categoryId: Int, name: String?, resources: ArrayList<CategoryBean>, view: View?)
     }
 
 }

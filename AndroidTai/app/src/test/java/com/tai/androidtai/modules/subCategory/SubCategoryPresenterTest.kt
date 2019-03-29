@@ -1,7 +1,6 @@
 package com.tai.androidtai.modules.subCategory
 
 import com.tai.androidtai.domain.bean.CategoryBean
-import com.tai.androidtai.domain.bean.ParentBean
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

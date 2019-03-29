@@ -20,13 +20,13 @@ class SubCategoryPresenter : SubCategoryContract.Presenter {
 
     override fun parseSubCategory(resources: ArrayList<CategoryBean>?, categoryId: Int) {
         val subCategory: ArrayList<CategoryBean> = arrayListOf()
-        resources?.let {
-            for (resource in resources) {
-                if (resource.getParent()?.getId() == categoryId) {
-                    subCategory.add(resource)
-                }
-            }
-        }
+//        resources?.let {
+//            for (resource in resources) {
+//                if (resource.getParent() == categoryId) {
+//                    subCategory.add(resource)
+//                }
+//            }
+//        }
         mView?.displayAllSubCategories(subCategory)
     }
 

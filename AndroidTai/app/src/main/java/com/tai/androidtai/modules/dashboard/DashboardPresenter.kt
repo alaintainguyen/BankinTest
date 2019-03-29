@@ -2,19 +2,20 @@ package com.tai.androidtai.modules.dashboard
 
 import com.tai.androidtai.domain.bean.CategoryBean
 import com.tai.androidtai.domain.bean.ResourceBean
+import com.tai.androidtai.domain.cache.EcoMoneyDatabase
 import com.tai.androidtai.domain.usecase.DashboardUseCase
 import com.tai.androidtai.modules.core.BaseContract
 import io.reactivex.annotations.NonNull
 import io.reactivex.observers.ResourceObserver
+import javax.inject.Inject
 
 class DashboardPresenter(private val mRouter: DashboardContract.Router, private val mDashboardUseCase: DashboardUseCase) : DashboardContract.Presenter {
 
     private var mView: DashboardContract.View? = null
     private var mResources: ArrayList<CategoryBean> = arrayListOf()
 
-    companion object {
-        private val TAG = DashboardPresenter::class.java.simpleName
-    }
+    @Inject
+    lateinit var mDao: EcoMoneyDatabase
 
     override fun subscribe(view: BaseContract.View) {
         mView = view as DashboardContract.View
@@ -30,9 +31,9 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
         mDashboardUseCase.execute(GetInfoSubscriber())
     }
 
-    override fun goToSubCategory(categoryId: Int, name: String?) {
-        mRouter.goToSubCategory(categoryId, name, mResources, mView)
-    }
+//    override fun goToSubCategory(categoryId: Int, name: String?) {
+//        mRouter.goToSubCategory(categoryId, name, mResources, mView)
+//    }
 
     fun listAllCaterory(resources: ArrayList<CategoryBean>): ArrayList<CategoryBean> {
         val categoryList: ArrayList<CategoryBean> = arrayListOf()
@@ -51,6 +52,7 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
 
         override fun onNext(@NonNull resources: ResourceBean) {
             mResources = resources.getResultList()
+            mDao.cachedResourcesDao().insertAll(resources.getResultList())
             val allCategories = listAllCaterory(resources.getResultList())
             mView?.displayInformation(allCategories)
         }

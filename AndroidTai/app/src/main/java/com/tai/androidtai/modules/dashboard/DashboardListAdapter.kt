@@ -22,7 +22,7 @@ class DashboardListAdapter internal constructor(private val mPresenter: Dashboar
         val resultBean = mItems[position]
         holder.itemView.name.text = resultBean.getName()
         holder.itemView.layout.setOnClickListener {
-            mPresenter.goToSubCategory(resultBean.getId(), resultBean.getName())
+//            mPresenter.goToSubCategory(resultBean.getId(), resultBean.getName())
         }
     }
 

@@ -2,6 +2,7 @@ package com.tai.androidtai
 
 import android.app.Activity
 import androidx.annotation.VisibleForTesting
+import com.facebook.stetho.Stetho
 import com.tai.androidtai.dagger.components.AndroidTaiComponent
 import com.tai.androidtai.dagger.components.ApplicationComponent
 import dagger.android.AndroidInjector
@@ -21,6 +22,12 @@ class AndroidTaiApplication : DaggerApplication() {
         super.onCreate()
         applicationComponent = initializeApplicationComponent()
         applicationComponent.inject(this)
+
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                        .build())
     }
 
     private fun initializeApplicationComponent(): AndroidTaiComponent {
