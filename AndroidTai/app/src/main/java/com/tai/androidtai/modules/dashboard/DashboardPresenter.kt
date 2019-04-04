@@ -13,9 +13,7 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
 
     private var mView: DashboardContract.View? = null
     private var mResources: ArrayList<CategoryBean> = arrayListOf()
-
-    @Inject
-    lateinit var mDao: EcoMoneyDatabase
+    private var mDao: EcoMoneyDatabase.CachedResourcesDao? = null
 
     override fun subscribe(view: BaseContract.View) {
         mView = view as DashboardContract.View
@@ -31,6 +29,10 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
         mDashboardUseCase.execute(GetInfoSubscriber())
     }
 
+    override fun setDao(dao: EcoMoneyDatabase.CachedResourcesDao) {
+        mDao = dao
+    }
+
 //    override fun goToSubCategory(categoryId: Int, name: String?) {
 //        mRouter.goToSubCategory(categoryId, name, mResources, mView)
 //    }
@@ -38,13 +40,13 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
     fun listAllCaterory(resources: ArrayList<CategoryBean>): ArrayList<CategoryBean> {
         val categoryList: ArrayList<CategoryBean> = arrayListOf()
 
-        resources.let {
-            for (item in resources) {
-                if (item.getParent() == null) {
-                    categoryList.add(item)
-                }
-            }
-        }
+//        resources.let {
+//            for (item in resources) {
+//                if (item.getParent() == null) {
+//                    categoryList.add(item)
+//                }
+//            }
+//        }
         return categoryList
     }
 
@@ -52,7 +54,6 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
 
         override fun onNext(@NonNull resources: ResourceBean) {
             mResources = resources.getResultList()
-            mDao.cachedResourcesDao().insertAll(resources.getResultList())
             val allCategories = listAllCaterory(resources.getResultList())
             mView?.displayInformation(allCategories)
         }

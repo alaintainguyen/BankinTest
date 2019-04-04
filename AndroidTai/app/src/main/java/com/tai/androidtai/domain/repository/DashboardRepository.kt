@@ -1,11 +1,13 @@
 package com.tai.androidtai.domain.repository
 
-import com.tai.androidtai.domain.bean.ResourceBean
+import android.content.Context
+import androidx.room.Room
 import com.tai.androidtai.domain.bean.CategoryBean
+import com.tai.androidtai.domain.bean.ResourceBean
+import com.tai.androidtai.domain.cache.EcoMoneyDatabase
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.http.GET
-import retrofit2.http.Path
 import javax.inject.Inject
 
 class DashboardRepository
@@ -13,14 +15,25 @@ class DashboardRepository
 @Inject
 constructor(retrofit: Retrofit) {
 
-    private val mService: DashboardService
+    private var mService: DashboardService
+    private var mDao: EcoMoneyDatabase.CachedResourcesDao? = null
 
     init {
         mService = retrofit.create(DashboardService::class.java)
     }
 
+    @Inject
+    fun DashboardRepository(context: Context) {
+        val db = Room.databaseBuilder(context, EcoMoneyDatabase::class.java, "database-name").build()
+        mDao = db.cachedResourcesDao()
+    }
+
     fun getInfo(): Observable<ResourceBean> {
         return mService.getInfo()
+    }
+
+    fun setCache(resource: List<CategoryBean>) {
+        mDao?.insertAll(resource)
     }
 
     private interface DashboardService {

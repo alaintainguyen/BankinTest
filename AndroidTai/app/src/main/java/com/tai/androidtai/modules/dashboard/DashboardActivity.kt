@@ -35,6 +35,12 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
         dashboard_rv.adapter = mDashboardListAdapter
         mPresenter.getInfo()
 
+        val mDao: EcoMoneyDatabase.CachedResourcesDao
+        val db = Room.databaseBuilder(this, EcoMoneyDatabase::class.java, "database-name").build()
+
+        mDao = db.cachedResourcesDao()
+
+        mPresenter.setDao(mDao)
         dashboard_refresh.setColorSchemeColors(ContextCompat.getColor(this, R.color.colorPrimary))
 
         dashboard_refresh.setOnRefreshListener {

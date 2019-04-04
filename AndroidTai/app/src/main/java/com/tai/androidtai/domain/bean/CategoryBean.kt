@@ -17,8 +17,8 @@ class CategoryBean {
     @SerializedName("name")
     private var mName: String? = null
 
-    @SerializedName("parent")
-    private var mParent: ParentBean? = null
+//    @SerializedName("parent")
+//    private var mParent: ParentBean? = null
 
     fun getId(): Int {
         return mId
@@ -28,13 +28,13 @@ class CategoryBean {
         return mName
     }
 
-    fun getParent(): ParentBean? {
-        return mParent
-    }
-
-    fun setParent(parent: ParentBean) {
-        mParent = parent
-    }
+//    fun getParent(): ParentBean? {
+//        return mParent
+//    }
+//
+//    fun setParent(parent: ParentBean) {
+//        mParent = parent
+//    }
 
     fun setId(id: Int) {
         mId = id
