@@ -1,6 +1,7 @@
 package com.tai.androidtai.domain.bean
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
@@ -17,7 +18,7 @@ class CategoryBean {
     @SerializedName("name")
     private var mName: String? = null
 
-    @ColumnInfo(name = "parent")
+    @Embedded
     @SerializedName("parent")
     private var mParent: ParentBean? = null
 
@@ -30,7 +31,11 @@ class CategoryBean {
     }
 
     fun getParent(): ParentBean? {
-        return mParent
+        return if (mParent == null) {
+            ParentBean(0)
+        } else {
+            mParent
+        }
     }
 
     fun setParent(parent: ParentBean) {
@@ -46,5 +51,3 @@ class CategoryBean {
     }
 
 }
-
-

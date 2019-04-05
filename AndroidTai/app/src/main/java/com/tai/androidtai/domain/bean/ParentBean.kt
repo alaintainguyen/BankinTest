@@ -1,16 +1,20 @@
 package com.tai.androidtai.domain.bean
 
-import android.os.Parcel
-import android.os.Parcelable
+import androidx.room.ColumnInfo
 import com.google.gson.annotations.SerializedName
 
-class ParentBean {
+class ParentBean(id: Int) {
 
+    @ColumnInfo(name = "parent_id")
     @SerializedName("id")
-    private var mId: Int = 0
+    private var mId: Int? = id
 
     fun getId(): Int? {
         return mId
+    }
+
+    fun setId(id: Int) {
+        mId = id
     }
 
 }

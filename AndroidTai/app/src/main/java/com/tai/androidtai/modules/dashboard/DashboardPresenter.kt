@@ -38,7 +38,7 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
 
         resources.let {
             for (item in resources) {
-                if (item.getParent() == null) {
+                if (item.getParent()?.getId() == 0) {
                     categoryList.add(item)
                 }
             }
