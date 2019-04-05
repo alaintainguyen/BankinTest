@@ -33,6 +33,7 @@ constructor(retrofit: Retrofit) {
     }
 
     fun setCache(resource: List<CategoryBean>) {
+        mDao?.deleteAll()
         mDao?.insertAll(resource)
     }
 

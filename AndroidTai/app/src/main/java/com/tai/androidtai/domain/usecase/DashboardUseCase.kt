@@ -15,7 +15,8 @@ internal constructor(postExecutionThread: Scheduler, private val mRepository: Da
 
     override fun buildObservable(params: Void?): Observable<ResourceBean>? {
         return mRepository.getInfo().flatMap { resource ->
-            mRepository.setCache(resource.getResultList())
+
+            mRepository.setCache(resource.getResultList().distinctBy { r -> r.getId() })
             Observable.just(resource)
         }
     }
