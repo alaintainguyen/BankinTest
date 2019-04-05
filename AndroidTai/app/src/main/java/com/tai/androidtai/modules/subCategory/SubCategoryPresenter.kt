@@ -1,8 +1,6 @@
 package com.tai.androidtai.modules.subCategory
 
-import com.tai.androidtai.domain.bean.CategoryBean
 import com.tai.androidtai.modules.core.BaseContract
-import java.util.ArrayList
 
 class SubCategoryPresenter : SubCategoryContract.Presenter {
 
@@ -18,16 +16,10 @@ class SubCategoryPresenter : SubCategoryContract.Presenter {
         }
     }
 
-    override fun parseSubCategory(resources: ArrayList<CategoryBean>?, categoryId: Int) {
-        val subCategory: ArrayList<CategoryBean> = arrayListOf()
-//        resources?.let {
-//            for (resource in resources) {
-//                if (resource.getParent() == categoryId) {
-//                    subCategory.add(resource)
-//                }
-//            }
-//        }
-        mView?.displayAllSubCategories(subCategory)
+    override fun parseSubCategory(categoryId: Int) {
+        // Todo SubCategoryUseCase
+        // mView?.displayAllSubCategories(subCategory)
+
     }
 
 }

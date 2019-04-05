@@ -11,7 +11,7 @@ interface SubCategoryContract {
     }
 
     interface Presenter : BaseContract.Presenter {
-        fun parseSubCategory(resources: ArrayList<CategoryBean>?, categoryId: Int)
+        fun parseSubCategory(categoryId: Int)
     }
 
 }

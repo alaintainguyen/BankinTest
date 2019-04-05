@@ -44,13 +44,12 @@ class SubCategoryActivity : BaseActivity(), SubCategoryContract.View {
         sub_category_rv.layoutManager = GridLayoutManager(this, NUMBER_OF_COLUMN)
         sub_category_rv.adapter = mSubCategoryListAdapter
 
-//        val resources = intent.getArrayList<CategoryBean>(RESOURCES)
         val categoryId = intent.getIntExtra(CATEGORY_ID, -1)
         val categoryName = intent.getStringExtra(NAME)
 
         sub_category_name.text = categoryName
 
-//        mPresenter.parseSubCategory(resources, categoryId)
+        mPresenter.parseSubCategory(categoryId)
     }
 
     override fun displayAllSubCategories(subCategory: ArrayList<CategoryBean>) {

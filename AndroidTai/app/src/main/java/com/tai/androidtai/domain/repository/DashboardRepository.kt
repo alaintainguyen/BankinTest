@@ -41,6 +41,14 @@ constructor(retrofit: Retrofit) {
         return mDao?.getAll()
     }
 
+    fun getSubCategory(id: Int): List<CategoryBean>? {
+        return mDao?.getSubCategory(id)
+    }
+
+    fun getMainCategory(): List<CategoryBean>? {
+        return mDao?.getMainCategory()
+    }
+
     private interface DashboardService {
 
         @GET("bankin-engineering/challenge-android/master/categories.json")

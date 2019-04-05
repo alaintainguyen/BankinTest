@@ -29,9 +29,9 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
         mDashboardUseCase.execute(GetInfoSubscriber())
     }
 
-//    override fun goToSubCategory(categoryId: Int, name: String?) {
-//        mRouter.goToSubCategory(categoryId, name, mResources, mView)
-//    }
+    override fun goToSubCategory(categoryId: Int, name: String?) {
+        mRouter.goToSubCategory(categoryId, name, mView)
+    }
 
     fun listAllCaterory(resources: List<CategoryBean>): List<CategoryBean> {
         val categoryList: ArrayList<CategoryBean> = arrayListOf()
