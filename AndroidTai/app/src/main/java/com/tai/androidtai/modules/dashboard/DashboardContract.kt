@@ -7,13 +7,12 @@ import com.tai.androidtai.modules.core.BaseContract
 interface DashboardContract {
 
     interface View : BaseContract.View {
-        fun displayInformation(allCategories: ArrayList<CategoryBean>)
+        fun displayInformation(allCategories: List<CategoryBean>)
         fun displayError()
     }
 
     interface Presenter : BaseContract.Presenter {
         fun getInfo()
-        fun setDao(dao: EcoMoneyDatabase.CachedResourcesDao)
 //        fun goToSubCategory(categoryId: Int, name: String?)
     }
 

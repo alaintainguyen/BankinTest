@@ -2,7 +2,6 @@ package com.tai.androidtai.domain.cache
 
 import androidx.room.*
 import com.tai.androidtai.domain.bean.CategoryBean
-import com.tai.androidtai.domain.bean.ResourceBean
 
 @Database(entities = [CategoryBean::class], version = 1)
 abstract class EcoMoneyDatabase : RoomDatabase() {

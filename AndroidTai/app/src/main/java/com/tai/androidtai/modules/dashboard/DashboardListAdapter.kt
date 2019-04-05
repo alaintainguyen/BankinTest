@@ -30,7 +30,7 @@ class DashboardListAdapter internal constructor(private val mPresenter: Dashboar
         return mItems.size
     }
 
-    fun addInformation(categories: ArrayList<CategoryBean>) {
+    fun addInformation(categories: List<CategoryBean>) {
         mItems.addAll(categories)
     }
 

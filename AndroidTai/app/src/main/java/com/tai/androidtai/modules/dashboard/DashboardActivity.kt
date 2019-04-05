@@ -35,12 +35,6 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
         dashboard_rv.adapter = mDashboardListAdapter
         mPresenter.getInfo()
 
-        val mDao: EcoMoneyDatabase.CachedResourcesDao
-        val db = Room.databaseBuilder(this, EcoMoneyDatabase::class.java, "database-name").build()
-
-        mDao = db.cachedResourcesDao()
-
-        mPresenter.setDao(mDao)
         dashboard_refresh.setColorSchemeColors(ContextCompat.getColor(this, R.color.colorPrimary))
 
         dashboard_refresh.setOnRefreshListener {
@@ -59,7 +53,7 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
         Snackbar.make(dashboard_refresh, R.string.generic_error, Snackbar.LENGTH_LONG).show()
     }
 
-    override fun displayInformation(allCategories: ArrayList<CategoryBean>) {
+    override fun displayInformation(allCategories: List<CategoryBean>) {
         dashboard_refresh.isRefreshing = false
         mDashboardListAdapter.addInformation(allCategories)
         mDashboardListAdapter.notifyDataSetChanged()
