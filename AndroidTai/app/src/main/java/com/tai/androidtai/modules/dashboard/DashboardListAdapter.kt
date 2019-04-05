@@ -20,7 +20,7 @@ class DashboardListAdapter internal constructor(private val mPresenter: Dashboar
 
     override fun onBindViewHolder(holder: DashboardViewHolder, position: Int) {
         val resultBean = mItems[position]
-        holder.itemView.name.text = resultBean.getName()
+        holder.itemView.name.text = resultBean.name
         holder.itemView.layout.setOnClickListener {
 //            mPresenter.goToSubCategory(resultBean.getId(), resultBean.getName())
         }

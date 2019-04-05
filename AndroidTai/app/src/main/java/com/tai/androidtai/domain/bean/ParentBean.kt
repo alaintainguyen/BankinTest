@@ -3,18 +3,11 @@ package com.tai.androidtai.domain.bean
 import androidx.room.ColumnInfo
 import com.google.gson.annotations.SerializedName
 
-class ParentBean(id: Int) {
+data class ParentBean(
+        @ColumnInfo(name = "parent_id")
+        @SerializedName("id")
+        var id: Int? = 0
+)
 
-    @ColumnInfo(name = "parent_id")
-    @SerializedName("id")
-    private var mId: Int? = id
 
-    fun getId(): Int? {
-        return mId
-    }
 
-    fun setId(id: Int) {
-        mId = id
-    }
-
-}

@@ -18,7 +18,7 @@ internal constructor(postExecutionThread: Scheduler, private val mRepository: Da
 
         return mRepository.getInfo().flatMap { resource ->
             mRepository.setCache(resource.getResultList().distinctBy {
-                r -> r.getId()
+                r -> r.id
             })
             Observable.just(mRepository.getAll())
         }

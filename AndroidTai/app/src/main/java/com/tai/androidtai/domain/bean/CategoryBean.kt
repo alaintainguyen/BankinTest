@@ -7,47 +7,17 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "resources")
-class CategoryBean {
+data class CategoryBean(
+        @PrimaryKey
+        @ColumnInfo(name = "resource_id")
+        @SerializedName("id")
+        var id: Int = 0,
 
-    @PrimaryKey
-    @ColumnInfo(name = "resource_id")
-    @SerializedName("id")
-    private var mId: Int = 0
+        @ColumnInfo(name = "name")
+        @SerializedName("name")
+        var name: String? = null,
 
-    @ColumnInfo(name = "name")
-    @SerializedName("name")
-    private var mName: String? = null
-
-    @Embedded
-    @SerializedName("parent")
-    private var mParent: ParentBean? = null
-
-    fun getId(): Int {
-        return mId
-    }
-
-    fun getName(): String? {
-        return mName
-    }
-
-    fun getParent(): ParentBean? {
-        return if (mParent == null) {
-            ParentBean(0)
-        } else {
-            mParent
-        }
-    }
-
-    fun setParent(parent: ParentBean) {
-        mParent = parent
-    }
-
-    fun setId(id: Int) {
-        mId = id
-    }
-
-    fun setName(name: String) {
-        mName = name
-    }
-
-}
+        @Embedded
+        @SerializedName("parent")
+        var parent: ParentBean? = null
+)
