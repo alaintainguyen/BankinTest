@@ -34,15 +34,15 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
 //    }
 
     fun listAllCaterory(resources: List<CategoryBean>): List<CategoryBean> {
-        val categoryList: List<CategoryBean> = arrayListOf()
+        val categoryList: ArrayList<CategoryBean> = arrayListOf()
 
-//        resources.let {
-//            for (item in resources) {
-//                if (item.getParent() == null) {
-//                    categoryList.add(item)
-//                }
-//            }
-//        }
+        resources.let {
+            for (item in resources) {
+                if (item.getParent() == null) {
+                    categoryList.add(item)
+                }
+            }
+        }
         return categoryList
     }
 
