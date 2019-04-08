@@ -14,8 +14,8 @@ class SubCategoryUseCase
 @Inject
 internal constructor(postExecutionThread: Scheduler, private val mRepository: DashboardRepository) : UseCase<List<CategoryBean>, Int>(postExecutionThread) {
 
-    override fun buildObservable(id: Int): Observable<List<CategoryBean>> {
-        return Observable.just(mRepository.getSubCategory(id))
+    override fun buildObservable(id: Int): Observable<List<CategoryBean>>? {
+        return mRepository.getSubCategory(id)
     }
 
 }

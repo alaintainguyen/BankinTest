@@ -7,15 +7,12 @@ import com.tai.androidtai.R
 import com.tai.androidtai.domain.bean.CategoryBean
 import com.tai.androidtai.modules.core.BaseActivity
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.activity_sub_categories.*
-import java.util.ArrayList
 import javax.inject.Inject
 
 class SubCategoryActivity : BaseActivity(), SubCategoryContract.View {
 
     companion object {
-        const val RESOURCES: String = "resources"
         const val CATEGORY_ID: String = "id"
         const val NAME: String = "name"
         const val NUMBER_OF_COLUMN: Int = 2
@@ -55,7 +52,7 @@ class SubCategoryActivity : BaseActivity(), SubCategoryContract.View {
     }
 
     override fun displayAllSubCategories(subCategory: List<CategoryBean>) {
-        mSubCategoryListAdapter.addInformation(subCategory)
+        mSubCategoryListAdapter.addSubCategory(subCategory)
     }
 
     override fun onDestroy() {

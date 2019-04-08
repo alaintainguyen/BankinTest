@@ -23,7 +23,7 @@ constructor(retrofit: Retrofit) {
     }
 
     @Inject
-    fun DashboardRepository(context: Context) {
+    fun dashboardRepository(context: Context) {
         val db = Room.databaseBuilder(context, EcoMoneyDatabase::class.java, "database-name").build()
         mDao = db.cachedResourcesDao()
     }
@@ -37,11 +37,7 @@ constructor(retrofit: Retrofit) {
         mDao?.insertAll(resource)
     }
 
-    fun getAll(): List<CategoryBean>? {
-        return mDao?.getAll()
-    }
-
-    fun getSubCategory(id: Int): List<CategoryBean>? {
+    fun getSubCategory(id: Int): Observable<List<CategoryBean>>? {
         return mDao?.getSubCategory(id)
     }
 
