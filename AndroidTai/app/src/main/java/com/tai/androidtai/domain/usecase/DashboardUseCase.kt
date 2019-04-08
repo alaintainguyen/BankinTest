@@ -20,7 +20,7 @@ internal constructor(postExecutionThread: Scheduler, private val mRepository: Da
             mRepository.setCache(resource.getResultList().distinctBy {
                 r -> r.id
             })
-            Observable.just(mRepository.getAll())
+            Observable.just(mRepository.getMainCategory())
         }
     }
 

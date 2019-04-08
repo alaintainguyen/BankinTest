@@ -12,8 +12,6 @@ import javax.inject.Inject
 class DashboardPresenter(private val mRouter: DashboardContract.Router, private val mDashboardUseCase: DashboardUseCase) : DashboardContract.Presenter {
 
     private var mView: DashboardContract.View? = null
-    private var mResources: List<CategoryBean> = arrayListOf()
-    private var mDao: EcoMoneyDatabase.CachedResourcesDao? = null
 
     override fun subscribe(view: BaseContract.View) {
         mView = view as DashboardContract.View
@@ -33,25 +31,10 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
         mRouter.goToSubCategory(categoryId, name, mView)
     }
 
-    fun listAllCaterory(resources: List<CategoryBean>): List<CategoryBean> {
-        val categoryList: ArrayList<CategoryBean> = arrayListOf()
-
-        resources.let {
-            for (item in resources) {
-                if (item.parent == null) {
-                    categoryList.add(item)
-                }
-            }
-        }
-        return categoryList
-    }
-
     inner class GetInfoSubscriber : ResourceObserver<List<CategoryBean>>() {
 
         override fun onNext(@NonNull resources: List<CategoryBean>) {
-            mResources = resources
-            val allCategories = listAllCaterory(resources)
-            mView?.displayInformation(allCategories)
+            mView?.displayInformation(resources)
         }
 
         override fun onError(@NonNull e: Throwable) {

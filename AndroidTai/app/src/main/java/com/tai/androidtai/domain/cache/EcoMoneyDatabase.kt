@@ -13,10 +13,10 @@ abstract class EcoMoneyDatabase : RoomDatabase() {
         @Query("SELECT * FROM resources")
         fun getAll(): List<CategoryBean>
 
-        @Query("SELECT * FROM resources WHERE parent_id == :id")
+        @Query("SELECT * FROM resources WHERE parent_id = :id")
         fun getSubCategory(id: Int): List<CategoryBean>
 
-        @Query("SELECT * FROM resources WHERE parent_id == null")
+        @Query("SELECT * FROM resources WHERE parent_id IS NULL")
         fun getMainCategory(): List<CategoryBean>
 
         @Insert
