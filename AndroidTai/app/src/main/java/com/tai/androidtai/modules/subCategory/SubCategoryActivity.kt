@@ -51,8 +51,9 @@ class SubCategoryActivity : BaseActivity(), SubCategoryContract.View {
         mPresenter.parseSubCategory(categoryId)
     }
 
-    override fun displayAllSubCategories(subCategory: List<CategoryBean>) {
+    override fun displayAllSubCategories(subCategory: ArrayList<CategoryBean>) {
         mSubCategoryListAdapter.addSubCategory(subCategory)
+        mSubCategoryListAdapter.notifyDataSetChanged()
     }
 
     override fun onDestroy() {

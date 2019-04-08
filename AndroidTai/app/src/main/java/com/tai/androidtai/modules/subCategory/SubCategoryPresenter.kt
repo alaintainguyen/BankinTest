@@ -5,6 +5,7 @@ import com.tai.androidtai.domain.usecase.SubCategoryUseCase
 import com.tai.androidtai.modules.core.BaseContract
 import io.reactivex.annotations.NonNull
 import io.reactivex.observers.ResourceObserver
+import java.util.ArrayList
 
 class SubCategoryPresenter(private val mSubDashboardUseCase: SubCategoryUseCase) : SubCategoryContract.Presenter {
 
@@ -27,7 +28,7 @@ class SubCategoryPresenter(private val mSubDashboardUseCase: SubCategoryUseCase)
     inner class GetSubCategorySubscriber : ResourceObserver<List<CategoryBean>>() {
 
         override fun onNext(@NonNull subCategory: List<CategoryBean>) {
-            mView?.displayAllSubCategories(subCategory)
+            mView?.displayAllSubCategories(subCategory as ArrayList<CategoryBean>)
         }
 
         override fun onError(@NonNull e: Throwable) {
