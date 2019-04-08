@@ -7,7 +7,8 @@ import java.util.ArrayList
 interface SubCategoryContract {
 
     interface View : BaseContract.View {
-        fun displayAllSubCategories(subCategory: ArrayList<CategoryBean>)
+        fun displayAllSubCategories(subCategory: List<CategoryBean>)
+        fun displayError()
     }
 
     interface Presenter : BaseContract.Presenter {

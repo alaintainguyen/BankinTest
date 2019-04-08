@@ -2,10 +2,12 @@ package com.tai.androidtai.modules.subCategory
 
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.tai.androidtai.R
 import com.tai.androidtai.domain.bean.CategoryBean
 import com.tai.androidtai.modules.core.BaseActivity
 import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.activity_sub_categories.*
 import java.util.ArrayList
 import javax.inject.Inject
@@ -52,13 +54,17 @@ class SubCategoryActivity : BaseActivity(), SubCategoryContract.View {
         mPresenter.parseSubCategory(categoryId)
     }
 
-    override fun displayAllSubCategories(subCategory: ArrayList<CategoryBean>) {
+    override fun displayAllSubCategories(subCategory: List<CategoryBean>) {
         mSubCategoryListAdapter.addInformation(subCategory)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         mPresenter.unsubscribe(this)
+    }
+
+    override fun displayError() {
+        Snackbar.make(sub_category_cl, R.string.generic_error, Snackbar.LENGTH_LONG).show()
     }
 
 }

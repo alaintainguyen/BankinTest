@@ -27,7 +27,7 @@ class SubCategoryListAdapter : RecyclerView.Adapter<SubCategoryListAdapter.SubCa
         return mItems.size
     }
 
-    fun addInformation(categories: ArrayList<CategoryBean>) {
+    fun addInformation(categories: List<CategoryBean>) {
         mItems.addAll(categories)
     }
 

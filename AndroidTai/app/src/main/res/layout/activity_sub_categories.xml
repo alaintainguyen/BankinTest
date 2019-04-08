@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/user_cl"
+        android:id="@+id/sub_category_cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context="com.tai.androidtai.modules.subCategory.SubCategoryActivity">

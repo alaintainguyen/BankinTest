@@ -46,5 +46,4 @@ class DashboardPresenter(private val mRouter: DashboardContract.Router, private 
         }
     }
 
-
 }
