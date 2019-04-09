@@ -20,9 +20,9 @@ class DashboardListAdapter internal constructor(private val mPresenter: Dashboar
 
     override fun onBindViewHolder(holder: DashboardViewHolder, position: Int) {
         val resultBean = mItems[position]
-        holder.itemView.name.text = resultBean.getName()
+        holder.itemView.name.text = resultBean.name
         holder.itemView.layout.setOnClickListener {
-            mPresenter.goToSubCategory(resultBean.getId(), resultBean.getName())
+            mPresenter.goToSubCategory(resultBean.id, resultBean.name)
         }
     }
 
@@ -30,7 +30,7 @@ class DashboardListAdapter internal constructor(private val mPresenter: Dashboar
         return mItems.size
     }
 
-    fun addInformation(categories: ArrayList<CategoryBean>) {
+    fun addInformation(categories: List<CategoryBean>) {
         mItems.addAll(categories)
     }
 

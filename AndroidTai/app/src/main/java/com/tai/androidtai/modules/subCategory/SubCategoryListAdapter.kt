@@ -20,14 +20,14 @@ class SubCategoryListAdapter : RecyclerView.Adapter<SubCategoryListAdapter.SubCa
 
     override fun onBindViewHolder(holder: SubCategoryViewHolder, position: Int) {
         val resultBean = mItems[position]
-        holder.itemView.name.text = resultBean.getName()
+        holder.itemView.name.text = resultBean.name
     }
 
     override fun getItemCount(): Int {
         return mItems.size
     }
 
-    fun addInformation(categories: ArrayList<CategoryBean>) {
+    fun addSubCategory(categories: ArrayList<CategoryBean>) {
         mItems.addAll(categories)
     }
 

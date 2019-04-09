@@ -6,7 +6,7 @@ import com.tai.androidtai.modules.core.BaseContract
 interface DashboardContract {
 
     interface View : BaseContract.View {
-        fun displayInformation(allCategories: ArrayList<CategoryBean>)
+        fun displayInformation(allCategories: List<CategoryBean>)
         fun displayError()
     }
 
@@ -16,7 +16,7 @@ interface DashboardContract {
     }
 
     interface Router : BaseContract.Router {
-        fun goToSubCategory(categoryId: Int, name: String?, resources: ArrayList<CategoryBean>, view: View?)
+        fun goToSubCategory(categoryId: Int, name: String?, view: View?)
     }
 
 }

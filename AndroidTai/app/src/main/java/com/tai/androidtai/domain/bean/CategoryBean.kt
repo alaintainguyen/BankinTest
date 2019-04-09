@@ -1,66 +1,23 @@
 package com.tai.androidtai.domain.bean
 
-import android.os.Parcel
-import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-class CategoryBean : Parcelable {
+@Entity(tableName = "resources")
+data class CategoryBean(
+        @PrimaryKey
+        @ColumnInfo(name = "resource_id")
+        @SerializedName("id")
+        var id: Int = 0,
 
-    @SerializedName("id")
-    private var mId: Int = 0
+        @ColumnInfo(name = "name")
+        @SerializedName("name")
+        var name: String? = null,
 
-    @SerializedName("name")
-    private var mName: String? = null
-
-    @SerializedName("parent")
-    private var mParent: ParentBean? = null
-
-    private constructor(parcel: Parcel) {
-        mId = parcel.readInt()
-        mName = parcel.readString()
-        mParent = parcel.readParcelable(ParentBean::class.java.classLoader)
-    }
-
-    constructor(id: Int) {
-        mId = id
-    }
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeInt(mId)
-        dest.writeString(mName)
-        dest.writeParcelable(mParent, flags)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    fun getId(): Int {
-        return mId
-    }
-
-    fun getName(): String? {
-        return mName
-    }
-
-    fun getParent(): ParentBean? {
-        return mParent
-    }
-
-    fun setParent(parent: ParentBean) {
-        mParent = parent
-    }
-
-    companion object {
-        @JvmField
-        val CREATOR: Parcelable.Creator<CategoryBean> = object : Parcelable.Creator<CategoryBean> {
-            override fun createFromParcel(parcel: Parcel): CategoryBean {
-                return CategoryBean(parcel)
-            }
-
-            override fun newArray(size: Int): Array<CategoryBean?> {
-                return arrayOfNulls(size)
-            }
-        }
-    }
-}
+        @Embedded
+        @SerializedName("parent")
+        var parent: ParentBean? = null
+)

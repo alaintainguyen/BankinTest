@@ -27,7 +27,7 @@ public abstract class UseCase<T, Params> {
      * @param useCaseSubscriber The guy who will be listen to the observable build
      *                          with {@link #buildObservable(Params params)}.
      */
-    public void execute(ResourceObserver useCaseSubscriber, Params params) {
+    public void execute(ResourceObserver<T> useCaseSubscriber, Params params) {
         mSubscription.add(buildObservable(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(mPostExecutionThread)

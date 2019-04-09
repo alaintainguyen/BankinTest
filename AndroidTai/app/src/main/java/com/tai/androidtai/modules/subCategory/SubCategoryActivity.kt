@@ -2,18 +2,17 @@ package com.tai.androidtai.modules.subCategory
 
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.tai.androidtai.R
 import com.tai.androidtai.domain.bean.CategoryBean
 import com.tai.androidtai.modules.core.BaseActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_sub_categories.*
-import java.util.ArrayList
 import javax.inject.Inject
 
 class SubCategoryActivity : BaseActivity(), SubCategoryContract.View {
 
     companion object {
-        const val RESOURCES: String = "resources"
         const val CATEGORY_ID: String = "id"
         const val NAME: String = "name"
         const val NUMBER_OF_COLUMN: Int = 2
@@ -44,22 +43,26 @@ class SubCategoryActivity : BaseActivity(), SubCategoryContract.View {
         sub_category_rv.layoutManager = GridLayoutManager(this, NUMBER_OF_COLUMN)
         sub_category_rv.adapter = mSubCategoryListAdapter
 
-        val resources = intent.getParcelableArrayListExtra<CategoryBean>(RESOURCES)
         val categoryId = intent.getIntExtra(CATEGORY_ID, -1)
         val categoryName = intent.getStringExtra(NAME)
 
         sub_category_name.text = categoryName
 
-        mPresenter.parseSubCategory(resources, categoryId)
+        mPresenter.parseSubCategory(categoryId)
     }
 
     override fun displayAllSubCategories(subCategory: ArrayList<CategoryBean>) {
-        mSubCategoryListAdapter.addInformation(subCategory)
+        mSubCategoryListAdapter.addSubCategory(subCategory)
+        mSubCategoryListAdapter.notifyDataSetChanged()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         mPresenter.unsubscribe(this)
+    }
+
+    override fun displayError() {
+        Snackbar.make(sub_category_cl, R.string.generic_error, Snackbar.LENGTH_LONG).show()
     }
 
 }

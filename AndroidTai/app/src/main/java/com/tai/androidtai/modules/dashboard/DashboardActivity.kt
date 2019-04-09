@@ -3,9 +3,11 @@ package com.tai.androidtai.modules.dashboard
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
 import com.tai.androidtai.R
 import com.tai.androidtai.domain.bean.CategoryBean
+import com.tai.androidtai.domain.cache.EcoMoneyDatabase
 import com.tai.androidtai.modules.core.BaseActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -49,10 +51,9 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
     override fun displayError() {
         dashboard_refresh.isRefreshing = false
         Snackbar.make(dashboard_refresh, R.string.generic_error, Snackbar.LENGTH_LONG).show()
-
     }
 
-    override fun displayInformation(allCategories: ArrayList<CategoryBean>) {
+    override fun displayInformation(allCategories: List<CategoryBean>) {
         dashboard_refresh.isRefreshing = false
         mDashboardListAdapter.addInformation(allCategories)
         mDashboardListAdapter.notifyDataSetChanged()

@@ -1,10 +1,13 @@
 package com.tai.androidtai.modules.subCategory
 
 import com.tai.androidtai.domain.bean.CategoryBean
+import com.tai.androidtai.domain.usecase.SubCategoryUseCase
 import com.tai.androidtai.modules.core.BaseContract
+import io.reactivex.annotations.NonNull
+import io.reactivex.observers.ResourceObserver
 import java.util.ArrayList
 
-class SubCategoryPresenter : SubCategoryContract.Presenter {
+class SubCategoryPresenter(private val mSubDashboardUseCase: SubCategoryUseCase) : SubCategoryContract.Presenter {
 
     private var mView: SubCategoryContract.View? = null
 
@@ -18,16 +21,23 @@ class SubCategoryPresenter : SubCategoryContract.Presenter {
         }
     }
 
-    override fun parseSubCategory(resources: ArrayList<CategoryBean>?, categoryId: Int) {
-        val subCategory: ArrayList<CategoryBean> = arrayListOf()
-        resources?.let {
-            for (resource in resources) {
-                if (resource.getParent()?.getId() == categoryId) {
-                    subCategory.add(resource)
-                }
-            }
+    override fun parseSubCategory(categoryId: Int) {
+        mSubDashboardUseCase.execute(GetSubCategorySubscriber(), categoryId)
+    }
+
+    inner class GetSubCategorySubscriber : ResourceObserver<List<CategoryBean>>() {
+
+        override fun onNext(@NonNull subCategory: List<CategoryBean>) {
+            mView?.displayAllSubCategories(subCategory as ArrayList<CategoryBean>)
         }
-        mView?.displayAllSubCategories(subCategory)
+
+        override fun onError(@NonNull e: Throwable) {
+            mView?.displayError()
+        }
+
+        override fun onComplete() {
+            // Nothing to do
+        }
     }
 
 }

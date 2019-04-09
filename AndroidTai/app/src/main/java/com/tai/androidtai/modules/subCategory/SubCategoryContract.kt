@@ -8,10 +8,11 @@ interface SubCategoryContract {
 
     interface View : BaseContract.View {
         fun displayAllSubCategories(subCategory: ArrayList<CategoryBean>)
+        fun displayError()
     }
 
     interface Presenter : BaseContract.Presenter {
-        fun parseSubCategory(resources: ArrayList<CategoryBean>?, categoryId: Int)
+        fun parseSubCategory(categoryId: Int)
     }
 
 }
